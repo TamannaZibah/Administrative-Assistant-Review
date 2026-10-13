@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical Assistant Interactive Lab Course</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    /* WCAG & Eye-Friendly Adaptive Design System */
+    :root {
+      --font-scale: 1rem;
+      --font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      font-family: var(--font-family-base);
+      font-size: var(--font-scale);
+      line-height: 1.6;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+
+    /* Dyslexic & Eye-Rest Accessible Font Option */
+    .dyslexia-font {
+      --font-family-base: 'Atkinson Hyperlegible', sans-serif !important;
+      letter-spacing: 0.02em;
+      word-spacing: 0.05em;
+    }
+
+    .cert-font-serif {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    /* High Visibility Focus Indicators (WCAG 2.4.7 & 2.4.11) */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    [tabindex="0"]:focus-visible {
+      outline: 3px solid #0f766e !important;
+      outline-offset: 3px !important;
+      box-shadow: 0 0 0 5px rgba(15, 118, 110, 0.25) !important;
+    }
+
+    /* High Contrast Mode */
+    .high-contrast-mode {
+      background-color: #020617 !important;
+      color: #f8fafc !important;
+    }
+    .high-contrast-mode .bg-white {
+      background-color: #0f172a !important;
+      color: #f8fafc !important;
+      border-color: #334155 !important;
+    }
+    .high-contrast-mode .bg-slate-50,
+    .high-contrast-mode .bg-slate-100 {
+      background-color: #1e293b !important;
+      color: #f1f5f9 !important;
+      border-color: #475569 !important;
+    }
+    .high-contrast-mode .text-slate-500,
+    .high-contrast-mode .text-slate-600,
+    .high-contrast-mode .text-slate-700,
+    .high-contrast-mode .text-slate-800,
+    .high-contrast-mode .text-slate-900 {
+      color: #f8fafc !important;
+    }
+    .high-contrast-mode .border-slate-200,
+    .high-contrast-mode .border-slate-300 {
+      border-color: #475569 !important;
+    }
+
+    /* Skip Link for Screen Readers and Keyboard users (WCAG 2.4.1) */
+    .skip-to-main {
+      position: absolute;
+      top: -60px;
+      left: 16px;
+      background: #0f766e;
+      color: #ffffff;
+      padding: 12px 20px;
+      font-weight: 700;
+      border-radius: 0 0 8px 8px;
+      z-index: 9999;
+      transition: top 0.2s ease-in-out;
+      text-decoration: none;
+    }
+    .skip-to-main:focus {
+      top: 0;
+      outline: 3px solid #facc15 !important;
+    }
+
+    /* Reduced Motion Preference (WCAG 2.3.3) */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Printable Official Certificate */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #certificate-printable, #certificate-printable * {
+        visibility: visible;
+      }
+      #certificate-printable {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: none !important;
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50/70 text-slate-900 antialiased min-h-screen flex flex-col transition-colors duration-200">
+
+  <!-- Accessibility Skip Link -->
+  <a href="#main-lab-content" class="skip-to-main">Skip to main lab content</a>
+
+  <!-- ARIA Live Region for Screen Reader Announcements -->
+  <div id="sr-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Header with WCAG compliant contrast & accessibility toolbar -->
+  <header class="bg-teal-900 text-white shadow-md sticky top-0 z-40 border-b border-teal-800" role="banner">
+    <!-- Quick Accessibility Control Panel (Font size, High Contrast, Dyslexic font) -->
+    <div class="bg-teal-950/90 border-b border-teal-800/80 px-4 py-1.5 text-xs">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+        <span class="text-teal-200 flex items-center gap-1.5 font-medium">
+          <i class="fa-solid fa-universal-access text-teal-300" aria-hidden="true"></i>
+          <span>Accessibility & Comfort Tools</span>
+        </span>
+        <div class="flex items-center gap-2 flex-wrap">
+          <!-- Font Size Adjusters -->
+          <div class="inline-flex rounded-lg border border-teal-700 bg-teal-900/60 p-0.5" role="group" aria-label="Text Size Controls">
+            <button onclick="adjustFontSize(-1)" aria-label="Decrease text size" class="px-2 py-0.5 rounded text-xs text-teal-100 hover:bg-teal-750 font-bold focus:ring-1 focus:ring-amber-300">A-</button>
+            <button onclick="resetFontSize()" aria-label="Reset text size to default" class="px-2 py-0.5 rounded text-xs text-teal-200 hover:bg-teal-750 font-medium border-x border-teal-700">100%</button>
+            <button onclick="adjustFontSize(1)" aria-label="Increase text size" class="px-2 py-0.5 rounded text-xs text-teal-100 hover:bg-teal-750 font-bold focus:ring-1 focus:ring-amber-300">A+</button>
+          </div>
+          <!-- High Contrast Mode Toggle -->
+          <button id="toggle-contrast-btn" onclick="toggleContrastMode()" class="px-2.5 py-1 rounded-lg bg-teal-800/80 hover:bg-teal-700 text-teal-100 border border-teal-650 flex items-center gap-1 font-semibold focus:ring-1 focus:ring-amber-300" aria-pressed="false">
+            <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
+            <span>High Contrast</span>
+          </button>
+          <!-- Dyslexia / Easy-Read Font Toggle -->
+          <button id="toggle-dyslexia-btn" onclick="toggleDyslexiaFont()" class="px-2.5 py-1 rounded-lg bg-teal-800/80 hover:bg-teal-700 text-teal-100 border border-teal-650 flex items-center gap-1 font-semibold focus:ring-1 focus:ring-amber-300" aria-pressed="false">
+            <i class="fa-solid fa-font" aria-hidden="true"></i>
+            <span>Dyslexia Font</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="bg-teal-800 p-2.5 rounded-xl border border-teal-600 flex items-center justify-center text-teal-100" aria-hidden="true">
+          <i class="fa-solid fa-staff-snake text-xl"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-base sm:text-lg leading-tight tracking-tight text-white">CMA Clinical Skills Simulation Lab</h1>
+          <p class="text-xs text-teal-200 font-medium">Interactive 2.0-Hour MA In-Service Training & Certification</p>
+        </div>
+      </div>
+
+      <!-- Lab Session Timer & User Details -->
+      <div class="flex items-center space-x-3">
+        <div class="flex items-center space-x-2 bg-teal-950 px-3 py-1.5 rounded-lg border border-teal-700 text-xs text-teal-100" aria-label="Remaining Lab Time">
+          <i class="fa-regular fa-clock text-teal-300" aria-hidden="true"></i>
+          <span>Lab Timer: <strong id="course-timer" class="font-mono text-white text-sm font-bold">02:00:00</strong></span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <span id="student-display-badge" class="hidden sm:inline-block text-xs bg-teal-950 text-teal-200 px-3 py-1.5 rounded-md border border-teal-700 font-medium">Student: Candidate</span>
+          <button id="reset-session-btn" title="Restart Lab Course" class="p-2 hover:bg-teal-800 bg-teal-950/60 text-teal-100 rounded-lg transition-colors text-xs flex items-center gap-1 border border-teal-700" aria-label="Reset simulation session">
+            <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
+            <span class="hidden sm:inline font-semibold">Reset</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1 flex flex-col">
+    <!-- Course Progress Bar & Tab Navigation with proper ARIA tabs roles -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200/90 p-4 mb-6" role="region" aria-label="Course Modules Navigation and Progress">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-teal-800">Clinical Competency Modules</span>
+          <h2 class="text-lg font-bold text-slate-900">Complete all units to unlock the Final Certification Exam</h2>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <div class="text-xs text-slate-600 font-semibold">Overall Progress</div>
+            <div id="progress-percent" class="text-sm font-bold text-teal-800" aria-live="polite">0% Completed</div>
+          </div>
+          <div class="w-32 bg-slate-200 h-3 rounded-full overflow-hidden border border-slate-300" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="progress-bar-container">
+            <div id="progress-bar-fill" class="bg-teal-700 h-full rounded-full transition-all duration-300 w-0"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs with accessible keyboard navigation -->
+      <nav class="flex overflow-x-auto space-x-2 pb-1 border-b border-slate-200 text-sm font-medium" id="course-tabs" role="tablist" aria-label="Course Learning Sections">
+        <button onclick="switchTab('tab-intro')" id="nav-tab-intro" role="tab" aria-selected="true" aria-controls="tab-intro" class="tab-btn px-4 py-2.5 rounded-xl border border-teal-700 bg-teal-50 text-teal-900 font-bold flex items-center gap-2 whitespace-nowrap transition-all shadow-sm">
+          <i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i> 1. Course Orientation
+        </button>
+        <button onclick="switchTab('tab-abbr')" id="nav-tab-abbr" role="tab" aria-selected="false" aria-controls="tab-abbr" class="tab-btn px-4 py-2.5 rounded-xl border border-transparent text-slate-700 hover:text-teal-900 hover:bg-slate-100 flex items-center gap-2 whitespace-nowrap transition-all font-semibold">
+          <i class="fa-solid fa-file-medical" aria-hidden="true"></i> 2. Medical Abbreviations
+        </button>
+        <button onclick="switchTab('tab-inventory')" id="nav-tab-inventory" role="tab" aria-selected="false" aria-controls="tab-inventory" class="tab-btn px-4 py-2.5 rounded-xl border border-transparent text-slate-700 hover:text-teal-900 hover:bg-slate-100 flex items-center gap-2 whitespace-nowrap transition-all font-semibold">
+          <i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i> 3. Inventory & Reordering
+        </button>
+        <button onclick="switchTab('tab-examroom')" id="nav-tab-examroom" role="tab" aria-selected="false" aria-controls="tab-examroom" class="tab-btn px-4 py-2.5 rounded-xl border border-transparent text-slate-700 hover:text-teal-900 hover:bg-slate-100 flex items-center gap-2 whitespace-nowrap transition-all font-semibold">
+          <i class="fa-solid fa-bed-pulse" aria-hidden="true"></i> 4. Exam Room Prep & Asepsis
+        </button>
+        <button onclick="switchTab('tab-quiz')" id="nav-tab-quiz" role="tab" aria-selected="false" aria-controls="tab-quiz" class="tab-btn px-4 py-2.5 rounded-xl border border-transparent text-slate-700 hover:text-teal-900 hover:bg-slate-100 flex items-center gap-2 whitespace-nowrap transition-all font-semibold">
+          <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> 5. Exam & Certification
+        </button>
+      </nav>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINERS (Labeled for accessibility) -->
+    <main id="main-lab-content" class="flex-1" tabindex="-1">
+
+      <section id="tab-intro" role="tabpanel" aria-labelledby="nav-tab-intro" class="tab-content block">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 space-y-6">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-teal-100 text-teal-900 text-xs font-bold rounded-full mb-3">
+                <i class="fa-regular fa-clock" aria-hidden="true"></i> 120-Minute Continuing Competency Lab
+              </div>
+              <h2 class="text-2xl font-bold text-slate-900 mb-3">Welcome to the Ambulatory MA Clinical Operations Lab</h2>
+              <p class="text-slate-700 leading-relaxed mb-4">
+                As a Medical Assistant (CMA, RMA, CCMA), mastering precision communication, lean clinical inventory management, and sterile room preparation ensures maximum patient safety, smooth clinic workflow, and regulatory OSHA/CLIA compliance.
+              </p>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+                <div class="p-4 bg-teal-50 rounded-xl border border-teal-200 flex flex-col justify-between">
+                  <div class="text-teal-800 text-2xl mb-2" aria-hidden="true"><i class="fa-solid fa-spell-check"></i></div>
+                  <h3 class="font-bold text-slate-900 text-sm">Standardized Terms</h3>
+                  <p class="text-xs text-slate-600 mt-1">Rx dosing, vital signs, anatomy, and Joint Commission "Do Not Use" list.</p>
+                </div>
+                <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200 flex flex-col justify-between">
+                  <div class="text-emerald-800 text-2xl mb-2" aria-hidden="true"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                  <h3 class="font-bold text-slate-900 text-sm">Kanban & Par Levels</h3>
+                  <p class="text-xs text-slate-600 mt-1">First-In First-Out (FIFO), calculating order points, and SDS compliance.</p>
+                </div>
+                <div class="p-4 bg-sky-50 rounded-xl border border-sky-200 flex flex-col justify-between">
+                  <div class="text-sky-800 text-2xl mb-2" aria-hidden="true"><i class="fa-solid fa-pump-soap"></i></div>
+                  <h3 class="font-bold text-slate-900 text-sm">Room Prep & Disinfection</h3>
+                  <p class="text-xs text-slate-600 mt-1">Contact kill times, sharps disposal, turnover protocols, and sterile field setup.</p>
+                </div>
+              </div>
+
+              <div class="border-t border-slate-200 pt-5">
+                <h3 class="font-bold text-slate-900 mb-2 text-sm flex items-center gap-2">
+                  <i class="fa-solid fa-clipboard-check text-teal-800" aria-hidden="true"></i> Course Syllabus & Estimated Lab Breakdown
+                </h3>
+                <ul class="text-xs text-slate-700 space-y-2 list-disc list-inside">
+                  <li><strong>Module 1 (30 Mins):</strong> 50+ Key Medical Abbreviations, Dosing Frequencies, Routes, & High-Risk "Do Not Use" warnings. Includes Flashcard trainer.</li>
+                  <li><strong>Module 2 (30 Mins):</strong> Supply Chain & Inventory Control. Interactive Par-Level stock ordering simulator and expiration FIFO review.</li>
+                  <li><strong>Module 3 (30 Mins):</strong> Exam Room Preparation, OSHA Bloodborne Pathogen Standards, table papering, EPA wet contact time, and tray setups.</li>
+                  <li><strong>Module 4 (30 Mins):</strong> Comprehensive 25-Question Proctored Board-Style Examination (80% Passing score unlocks Personalized Certificate).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Student Registration Card with high contrast labels -->
+          <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 bg-teal-100 text-teal-800 rounded-2xl flex items-center justify-center text-xl mb-4" aria-hidden="true">
+                <i class="fa-solid fa-id-card-clip"></i>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 mb-1">Student Candidate Profile</h3>
+              <p class="text-xs text-slate-600 mb-4">Please register your credential name to calibrate your customized final certificate.</p>
+              
+              <div class="space-y-4">
+                <div>
+                  <label for="student-name-input" class="block text-xs font-bold text-slate-800 mb-1">Student Full Name <span class="text-rose-700">*</span></label>
+                  <input type="text" id="student-name-input" aria-required="true" placeholder="e.g. Jane Doe, RMA" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-400 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-700" value="Alex Rivera, CMA">
+                </div>
+                <div>
+                  <label for="clinic-name-input" class="block text-xs font-bold text-slate-800 mb-1">Clinic / Training Institution</label>
+                  <input type="text" id="clinic-name-input" placeholder="e.g. Westside Family Practice & Urgent Care" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-400 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-700" value="Metro Ambulatory Health Center">
+                </div>
+                <div>
+                  <label for="specialty-track-input" class="block text-xs font-bold text-slate-800 mb-1">Specialty Track</label>
+                  <select id="specialty-track-input" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-700 bg-white text-slate-900">
+                    <option value="General Outpatient & Family Medicine">General Outpatient & Family Medicine</option>
+                    <option value="Internal Medicine & Geriatrics">Internal Medicine & Geriatrics</option>
+                    <option value="Pediatrics & Adolescent Medicine">Pediatrics & Adolescent Medicine</option>
+                    <option value="Minor Procedure & Surgical Specialty">Minor Procedure & Surgical Specialty</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-200">
+              <button onclick="saveStudentProfileAndNext()" class="w-full py-3 bg-teal-800 hover:bg-teal-900 text-white font-bold rounded-xl text-sm transition-all shadow-md flex items-center justify-center gap-2">
+                <span>Begin Lab Modules</span>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </button>
+              <div class="text-[11px] text-slate-500 text-center mt-2 font-medium">Auto-saved to current active browser session</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-abbr" role="tabpanel" aria-labelledby="nav-tab-abbr" class="tab-content hidden space-y-6">
+        <!-- Module Header -->
+        <div class="bg-gradient-to-r from-teal-900 to-slate-900 rounded-2xl p-6 text-white shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <span class="text-xs font-bold tracking-wider bg-white/20 px-2.5 py-1 rounded-full text-teal-100">Module 1 of 4</span>
+            <h2 class="text-2xl font-bold mt-2">Clinical Abbreviations, Dosages & Route Nomenclature</h2>
+            <p class="text-sm text-teal-100 mt-1">Review standard charting terms, routes, times, and Joint Commission "Do Not Use" patient safety standards.</p>
+          </div>
+          <div class="bg-white/10 px-4 py-2.5 rounded-xl border border-white/20 text-xs">
+            <span class="text-teal-200">Flashcard Mastery:</span>
+            <span id="abbr-mastered-count" class="font-bold text-white ml-1" aria-live="polite">0 / 24 Mastered</span>
+          </div>
+        </div>
+
+        <!-- The Joint Commission "Do Not Use" Alert Banner with compliant contrast -->
+        <div class="bg-amber-100/90 border-l-4 border-amber-600 p-4 rounded-xl shadow-xs" role="note" aria-label="Patient Safety Warning">
+          <div class="flex items-start">
+            <div class="flex-shrink-0 text-amber-800 mt-0.5" aria-hidden="true">
+              <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+            </div>
+            <div class="ml-3">
+              <h3 class="text-sm font-bold text-amber-950">High-Risk Joint Commission "Official Do Not Use" Abbreviations:</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 text-xs text-amber-950 mt-2 font-medium">
+                <div class="bg-white/80 p-2.5 rounded-lg border border-amber-300">
+                  <span class="font-bold text-rose-800 line-through">U, u (unit)</span> &rarr; <span class="font-bold text-emerald-900">Write: "Unit"</span>
+                </div>
+                <div class="bg-white/80 p-2.5 rounded-lg border border-amber-300">
+                  <span class="font-bold text-rose-800 line-through">IU (Int. Unit)</span> &rarr; <span class="font-bold text-emerald-900">Write: "International Unit"</span>
+                </div>
+                <div class="bg-white/80 p-2.5 rounded-lg border border-amber-300">
+                  <span class="font-bold text-rose-800 line-through">Q.D., QD, qod</span> &rarr; <span class="font-bold text-emerald-900">Write: "daily" / "every other day"</span>
+                </div>
+                <div class="bg-white/80 p-2.5 rounded-lg border border-amber-300">
+                  <span class="font-bold text-rose-800 line-through">Trailing zero (X.0 mg)</span> &rarr; <span class="font-bold text-emerald-900">Never use trailing zero; write "X mg"</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flashcards Interactive Area & Searchable Dictionary -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Interactive Flashcard Trainer with accessible keyboard flip -->
+          <div class="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between min-h-[380px]">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-teal-800">Interactive Clinical Drill</span>
+                <span id="flashcard-category" class="text-xs bg-slate-100 text-slate-800 px-2.5 py-1 rounded-md font-bold border border-slate-300">Administration / Timing</span>
+              </div>
+
+              <!-- Flip Card Container (Accessible button with keyboard Enter/Space triggering) -->
+              <div id="flashcard-box" role="button" tabindex="0" onclick="flipFlashcard()" onkeydown="handleCardKey(event)" aria-label="Clinical flashcard. Press enter or space to flip." class="cursor-pointer bg-slate-50 hover:bg-teal-50/50 p-8 rounded-2xl border-2 border-dashed border-teal-600 min-h-[190px] flex flex-col items-center justify-center text-center transition-all shadow-inner group">
+                <div id="flashcard-front">
+                  <span class="text-3xl font-extrabold text-teal-950 block" id="flashcard-term">BID</span>
+                  <p class="text-xs text-slate-600 mt-2 font-medium"><i class="fa-solid fa-hand-pointer text-teal-800" aria-hidden="true"></i> Press Space, Enter, or Click to flip</p>
+                </div>
+                <div id="flashcard-back" class="hidden">
+                  <h4 class="text-lg font-bold text-slate-900" id="flashcard-definition">Twice a day (bis in die)</h4>
+                  <p class="text-xs text-slate-700 mt-2 font-medium italic" id="flashcard-example">Example: "Amoxicillin 500mg PO BID with meals"</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="mt-4 pt-4 border-t border-slate-200 flex items-center justify-between">
+              <button onclick="prevFlashcard()" aria-label="Previous flashcard" class="px-3.5 py-2 rounded-lg border border-slate-400 text-xs font-bold text-slate-800 hover:bg-slate-100">
+                <i class="fa-solid fa-chevron-left mr-1" aria-hidden="true"></i> Prev
+              </button>
+              <div class="flex gap-2">
+                <button onclick="markCurrentAbbrMastered(false)" class="px-3 py-2 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-950 text-xs font-bold border border-amber-300">
+                  <i class="fa-solid fa-rotate-left mr-1" aria-hidden="true"></i> Review Again
+                </button>
+                <button onclick="markCurrentAbbrMastered(true)" class="px-3 py-2 rounded-lg bg-teal-800 hover:bg-teal-900 text-white text-xs font-bold shadow-sm">
+                  <i class="fa-solid fa-check mr-1" aria-hidden="true"></i> Mastered!
+                </button>
+              </div>
+              <button onclick="nextFlashcard()" aria-label="Next flashcard" class="px-3.5 py-2 rounded-lg border border-slate-400 text-xs font-bold text-slate-800 hover:bg-slate-100">
+                Next <i class="fa-solid fa-chevron-right ml-1" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Abbreviation Directory Filter & Table (Right 7 Cols) -->
+          <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+              <div>
+                <h3 class="text-base font-bold text-slate-900">Quick Reference Terminology Vault</h3>
+                <p class="text-xs text-slate-600 font-medium">Searchable guide for EHR documentation & physician orders</p>
+              </div>
+              <div class="relative">
+                <label for="abbr-search-input" class="sr-only">Search medical abbreviations</label>
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-500 text-xs" aria-hidden="true"></i>
+                <input type="text" id="abbr-search-input" onkeyup="filterAbbrTable()" placeholder="Search (e.g. NPO, IM, prn)..." class="text-xs pl-8 pr-3 py-2 border border-slate-400 rounded-lg w-full sm:w-48 text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-700 bg-white">
+              </div>
+            </div>
+
+            <div class="overflow-y-auto max-h-[300px] border border-slate-200 rounded-xl">
+              <table class="w-full text-left text-xs" aria-label="Medical Abbreviations Dictionary">
+                <thead class="bg-slate-100 text-slate-800 uppercase font-bold text-[11px] sticky top-0 border-b border-slate-300">
+                  <tr>
+                    <th scope="col" class="py-2.5 px-3">Abbr.</th>
+                    <th scope="col" class="py-2.5 px-3">Latin / Clinical Meaning</th>
+                    <th scope="col" class="py-2.5 px-3">Category</th>
+                    <th scope="col" class="py-2.5 px-3">Key Practice Note</th>
+                  </tr>
+                </thead>
+                <tbody id="abbr-table-body" class="divide-y divide-slate-200 text-slate-800">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Complete Module Check button -->
+            <div class="mt-4 pt-3 flex justify-end">
+              <button onclick="completeModule(1); switchTab('tab-inventory')" class="px-4 py-2 bg-teal-800 hover:bg-teal-900 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-sm">
+                <span>Save Module 1 & Proceed to Inventory Lab</span>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-inventory" role="tabpanel" aria-labelledby="nav-tab-inventory" class="tab-content hidden space-y-6">
+        <div class="bg-gradient-to-r from-emerald-900 to-teal-950 rounded-2xl p-6 text-white shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <span class="text-xs font-bold tracking-wider bg-white/20 px-2.5 py-1 rounded-full text-emerald-100">Module 2 of 4</span>
+            <h2 class="text-2xl font-bold mt-2">Clinic Inventory Management & Par-Level Reordering</h2>
+            <p class="text-sm text-emerald-100 mt-1">Master First-In-First-Out (FIFO) rotation, Par Levels, Safety Stock, and Safety Data Sheets (SDS).</p>
+          </div>
+          <div class="bg-white/10 px-4 py-2.5 rounded-xl border border-white/20 text-xs">
+            <span>Pending PO Draft:</span>
+            <span id="po-items-count" class="font-bold text-white ml-1">0 Items Flagged</span>
+          </div>
+        </div>
+
+        <!-- Inventory Principles Summary Cards with high contrast -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex gap-3">
+            <div class="w-10 h-10 rounded-lg bg-teal-100 text-teal-850 flex items-center justify-center flex-shrink-0 text-base" aria-hidden="true">
+              <i class="fa-solid fa-arrows-spin"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-xs text-slate-900">FIFO (First-In, First-Out)</h3>
+              <p class="text-xs text-slate-600 mt-0.5">Always place newly delivered lot boxes at the back of shelves. Pull oldest unexpired dates first.</p>
+            </div>
+          </div>
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex gap-3">
+            <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-850 flex items-center justify-center flex-shrink-0 text-base" aria-hidden="true">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-xs text-slate-900">Par-Level & Reorder Point</h3>
+              <p class="text-xs text-slate-600 mt-0.5">Par = Optimum baseline quantity required. Reorder triggered as soon as stock drops to or below threshold.</p>
+            </div>
+          </div>
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex gap-3">
+            <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-900 flex items-center justify-center flex-shrink-0 text-base" aria-hidden="true">
+              <i class="fa-solid fa-temperature-arrow-down"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-xs text-slate-900">Cold Chain & Biologics</h3>
+              <p class="text-xs text-slate-600 mt-0.5">Vaccines & rapid controls must be refrigerated at 2°C to 8°C (36°F to 46°F). Log twice daily.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Inventory Lab Simulator -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+            <div>
+              <h3 class="font-bold text-slate-900 text-base">Medical Office Supply Cart Audit Simulator</h3>
+              <p class="text-xs text-slate-600 font-medium">Perform weekly audit. Evaluate Current Stock vs Par Level, and calculate required order quantities.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="autoAuditInventory()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-lg border border-slate-300">
+                <i class="fa-solid fa-wand-magic-sparkles mr-1" aria-hidden="true"></i> Auto-Populate Current Counts
+              </button>
+            </div>
+          </div>
+
+          <!-- Inventory Table -->
+          <div class="overflow-x-auto border border-slate-300 rounded-xl">
+            <table class="w-full text-xs text-left" aria-label="Clinical Supply Inventory Table">
+              <thead class="bg-slate-100 text-slate-900 uppercase font-bold text-[11px] border-b border-slate-300">
+                <tr>
+                  <th scope="col" class="py-3 px-3">Item Description</th>
+                  <th scope="col" class="py-3 px-2">Clinical Location</th>
+                  <th scope="col" class="py-3 px-2 text-center">Par Level</th>
+                  <th scope="col" class="py-3 px-2 text-center">Reorder Point</th>
+                  <th scope="col" class="py-3 px-3 text-center">On-Hand Count</th>
+                  <th scope="col" class="py-3 px-3 text-center">Stock Status</th>
+                  <th scope="col" class="py-3 px-3 text-center">Reorder Qty</th>
+                  <th scope="col" class="py-3 px-2 text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-table-body" class="divide-y divide-slate-200">
+                <!-- Dynamically Generated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Purchase Requisition Summary Output -->
+          <div class="mt-6 bg-slate-50 p-4 rounded-xl border border-slate-300">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-2">
+              <h4 class="font-bold text-slate-900 text-xs flex items-center gap-2">
+                <i class="fa-solid fa-cart-shopping text-teal-800" aria-hidden="true"></i> Generated Medical Supply Purchase Order (PO)
+              </h4>
+              <span id="po-status-badge" class="text-[11px] px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 font-bold">Pending Calculation</span>
+            </div>
+            <div id="po-summary-list" class="text-xs text-slate-700 space-y-1">
+              <em>Click "Reorder" on items below threshold or adjust current on-hand quantities.</em>
+            </div>
+          </div>
+
+          <!-- Module Completion Controls -->
+          <div class="mt-4 pt-3 flex justify-end">
+            <button onclick="completeModule(2); switchTab('tab-examroom')" class="px-4 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-sm">
+              <span>Save Module 2 & Proceed to Exam Room Lab</span>
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-examroom" role="tabpanel" aria-labelledby="nav-tab-examroom" class="tab-content hidden space-y-6">
+        <div class="bg-gradient-to-r from-blue-900 to-indigo-950 rounded-2xl p-6 text-white shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <span class="text-xs font-bold tracking-wider bg-white/20 px-2.5 py-1 rounded-full text-blue-100">Module 3 of 4</span>
+            <h2 class="text-2xl font-bold mt-2">Exam Room Preparation, Sanitization & Procedure Trays</h2>
+            <p class="text-sm text-blue-100 mt-1">Practice sterile field setup, OSHA bloodborne pathogen decontamination, and standard exam turnover.</p>
+          </div>
+          <div class="bg-white/10 px-4 py-2.5 rounded-xl border border-white/20 text-xs">
+            <span>Room Turnover Checklist:</span>
+            <span id="prep-checklist-count" class="font-bold text-white ml-1" aria-live="polite">0 / 6 Steps Done</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Room Turnover Interactive Checklist with accessible labels -->
+          <div class="lg:col-span-6 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-base font-bold text-slate-900">Room Turnover & Sanitation Protocol</h3>
+                <span class="text-xs text-blue-800 font-bold bg-blue-100 px-2.5 py-0.5 rounded-md">OSHA & CDC Compliant</span>
+              </div>
+              <p class="text-xs text-slate-600 font-medium mb-4">Complete each mandatory step between every patient visit to prevent healthcare-associated infections (HAIs):</p>
+
+              <fieldset class="space-y-3" id="exam-checklist-container">
+                <legend class="sr-only">Exam Room Turnover Steps</legend>
+                <!-- Checklist Item 1 -->
+                <label class="flex items-start gap-3 p-3 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-300 cursor-pointer transition-all">
+                  <input type="checkbox" onchange="updateRoomChecklist()" class="exam-step-chk mt-1 rounded text-teal-800 focus:ring-teal-700 h-4 w-4 border-slate-400">
+                  <div class="text-xs">
+                    <span class="font-bold text-slate-900">1. PPE & Biohazard Disposal</span>
+                    <p class="text-slate-600 mt-0.5 font-medium">Don gloves; discard soiled paper drape, disposable speculums, and ensure used needles are locked in rigid Sharps container (never recap!).</p>
+                  </div>
+                </label>
+                <!-- Checklist Item 2 -->
+                <label class="flex items-start gap-3 p-3 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-300 cursor-pointer transition-all">
+                  <input type="checkbox" onchange="updateRoomChecklist()" class="exam-step-chk mt-1 rounded text-teal-800 focus:ring-teal-700 h-4 w-4 border-slate-400">
+                  <div class="text-xs">
+                    <span class="font-bold text-slate-900">2. EPA-Registered Wipe Down (Dwell Time)</span>
+                    <p class="text-slate-600 mt-0.5 font-medium">Wipe exam table, blood pressure cuffs, otoscope handles, and Mayo stands with intermediate hospital disinfectant. Ensure required wet contact time (e.g. 2-3 mins).</p>
+                  </div>
+                </label>
+                <!-- Checklist Item 3 -->
+                <label class="flex items-start gap-3 p-3 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-300 cursor-pointer transition-all">
+                  <input type="checkbox" onchange="updateRoomChecklist()" class="exam-step-chk mt-1 rounded text-teal-800 focus:ring-teal-700 h-4 w-4 border-slate-400">
+                  <div class="text-xs">
+                    <span class="font-bold text-slate-900">3. Fresh Table Paper & Barrier Application</span>
+                    <p class="text-slate-600 mt-0.5 font-medium">Once completely air-dried, smoothly pull fresh exam table paper from top roll to foot rest, tuck neatly, and fold clean drape sheet on pillow.</p>
+                  </div>
+                </label>
+                <!-- Checklist Item 4 -->
+                <label class="flex items-start gap-3 p-3 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-300 cursor-pointer transition-all">
+                  <input type="checkbox" onchange="updateRoomChecklist()" class="exam-step-chk mt-1 rounded text-teal-800 focus:ring-teal-700 h-4 w-4 border-slate-400">
+                  <div class="text-xs">
+                    <span class="font-bold text-slate-900">4. Diagnostic Station Verification</span>
+                    <p class="text-slate-600 mt-0.5 font-medium">Inspect otoscope/ophthalmoscope bulbs and battery charge. Refill disposable ear specula tips dispenser (2.5mm ped and 4.0mm adult).</p>
+                  </div>
+                </label>
+                <!-- Checklist Item 5 -->
+                <label class="flex items-start gap-3 p-3 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-300 cursor-pointer transition-all">
+                  <input type="checkbox" onchange="updateRoomChecklist()" class="exam-step-chk mt-1 rounded text-teal-800 focus:ring-teal-700 h-4 w-4 border-slate-400">
+                  <div class="text-xs">
+                    <span class="font-bold text-slate-900">5. Restock Core Point-of-Care Consumables</span>
+                    <p class="text-slate-600 mt-0.5 font-medium">Confirm adequate tongue depressors, cotton tip applicators, 2x2 gauze, alcohol preps, band-aids, and hand sanitizer pump are loaded.</p>
+                  </div>
+                </label>
+                <!-- Checklist Item 6 -->
+                <label class="flex items-start gap-3 p-3 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-300 cursor-pointer transition-all">
+                  <input type="checkbox" onchange="updateRoomChecklist()" class="exam-step-chk mt-1 rounded text-teal-800 focus:ring-teal-700 h-4 w-4 border-slate-400">
+                  <div class="text-xs">
+                    <span class="font-bold text-slate-900">6. EHR Terminal Privacy & Ambient Setting</span>
+                    <p class="text-slate-600 mt-0.5 font-medium">Log out or lock workstation screen to maintain HIPAA compliance. Adjust room temperature and ensure exam room door is closed.</p>
+                  </div>
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-200">
+              <div id="room-ready-banner" class="hidden p-3 bg-emerald-100 border border-emerald-300 text-emerald-950 rounded-xl text-xs font-bold flex items-center gap-2" role="status">
+                <i class="fa-solid fa-circle-check text-emerald-800 text-base" aria-hidden="true"></i>
+                <span>Exam Room 3 is fully disinfected, prepped, and certified ready for next patient!</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Procedure Tray Setup Simulator (Right 6 Cols) -->
+          <div class="lg:col-span-6 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-base font-bold text-slate-900">Minor Surgical & Suture Removal Tray Prep</h3>
+                <span class="text-xs bg-indigo-100 text-indigo-900 px-2.5 py-0.5 rounded-full font-bold">Sterile Technique</span>
+              </div>
+              <p class="text-xs text-slate-600 font-medium mb-4">
+                The physician has ordered a <em>Suture Removal & Wound Dressing Change</em>. Select all appropriate sterile and clean supplies for the Mayo stand:
+              </p>
+
+              <!-- Interactive Tray Selection Grid with accessible buttons and aria-pressed -->
+              <div class="grid grid-cols-2 gap-2 text-xs mb-4" id="tray-items-selection" role="group" aria-label="Mayo stand supply selection">
+                <button type="button" aria-pressed="false" onclick="toggleTrayItem(this, true, 'Suture Scissors (Littauer)')" class="tray-toggle p-2.5 rounded-xl border border-slate-300 text-left hover:border-indigo-650 transition-colors flex items-center justify-between font-medium text-slate-900">
+                  <span><i class="fa-solid fa-scissors text-slate-500 mr-1.5" aria-hidden="true"></i> Littauer Scissors</span>
+                  <i class="fa-regular fa-circle text-slate-400" aria-hidden="true"></i>
+                </button>
+                <button type="button" aria-pressed="false" onclick="toggleTrayItem(this, true, 'Tissue Forceps (Adson)')" class="tray-toggle p-2.5 rounded-xl border border-slate-300 text-left hover:border-indigo-650 transition-colors flex items-center justify-between font-medium text-slate-900">
+                  <span><i class="fa-solid fa-hand-holding-medical text-slate-500 mr-1.5" aria-hidden="true"></i> Adson Forceps</span>
+                  <i class="fa-regular fa-circle text-slate-400" aria-hidden="true"></i>
+                </button>
+                <button type="button" aria-pressed="false" onclick="toggleTrayItem(this, true, 'Sterile Gauze 4x4 Sponges')" class="tray-toggle p-2.5 rounded-xl border border-slate-300 text-left hover:border-indigo-650 transition-colors flex items-center justify-between font-medium text-slate-900">
+                  <span><i class="fa-solid fa-square text-slate-500 mr-1.5" aria-hidden="true"></i> Sterile 4x4 Gauze</span>
+                  <i class="fa-regular fa-circle text-slate-400" aria-hidden="true"></i>
+                </button>
+                <button type="button" aria-pressed="false" onclick="toggleTrayItem(this, true, 'Antiseptic Solution / Wipes')" class="tray-toggle p-2.5 rounded-xl border border-slate-300 text-left hover:border-indigo-650 transition-colors flex items-center justify-between font-medium text-slate-900">
+                  <span><i class="fa-solid fa-bottle-droplet text-slate-500 mr-1.5" aria-hidden="true"></i> Antiseptic Solution</span>
+                  <i class="fa-regular fa-circle text-slate-400" aria-hidden="true"></i>
+                </button>
+                <button type="button" aria-pressed="false" onclick="toggleTrayItem(this, true, 'Steri-Strips / Butterfly Closures')" class="tray-toggle p-2.5 rounded-xl border border-slate-300 text-left hover:border-indigo-650 transition-colors flex items-center justify-between font-medium text-slate-900">
+                  <span><i class="fa-solid fa-bandage text-slate-500 mr-1.5" aria-hidden="true"></i> Steri-Strips</span>
+                  <i class="fa-regular fa-circle text-slate-400" aria-hidden="true"></i>
+                </button>
+                <button type="button" aria-pressed="false" onclick="toggleTrayItem(this, false, 'Non-sterile Specimen Cup')" class="tray-toggle p-2.5 rounded-xl border border-slate-300 text-left hover:border-indigo-650 transition-colors flex items-center justify-between font-medium text-slate-900">
+                  <span><i class="fa-solid fa-vial text-slate-500 mr-1.5" aria-hidden="true"></i> Urine Specimen Cup</span>
+                  <i class="fa-regular fa-circle text-slate-400" aria-hidden="true"></i>
+                </button>
+                <button type="button" aria-pressed="false" onclick="toggleTrayItem(this, false, 'Stethoscope & Sphygmomanometer')" class="tray-toggle p-2.5 rounded-xl border border-slate-300 text-left hover:border-indigo-650 transition-colors flex items-center justify-between font-medium text-slate-900">
+                  <span><i class="fa-solid fa-stethoscope text-slate-500 mr-1.5" aria-hidden="true"></i> Stethoscope Tray</span>
+                  <i class="fa-regular fa-circle text-slate-400" aria-hidden="true"></i>
+                </button>
+                <button type="button" aria-pressed="false" onclick="toggleTrayItem(this, true, 'Sterile Gloves (Appropriate Size)')" class="tray-toggle p-2.5 rounded-xl border border-slate-300 text-left hover:border-indigo-650 transition-colors flex items-center justify-between font-medium text-slate-900">
+                  <span><i class="fa-solid fa-mitten text-slate-500 mr-1.5" aria-hidden="true"></i> Sterile Gloves</span>
+                  <i class="fa-regular fa-circle text-slate-400" aria-hidden="true"></i>
+                </button>
+              </div>
+
+              <!-- Sterile Boundary Rules Reminder with high contrast -->
+              <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-200 text-xs text-indigo-950 leading-relaxed">
+                <span class="font-bold"><i class="fa-solid fa-shield-halved text-indigo-800 mr-1" aria-hidden="true"></i> Aseptic Field Golden Rule:</span>
+                The outer 1-inch border of a sterile field is considered contaminated. Never turn your back on a sterile field or reach across it with non-sterile attire.
+              </div>
+            </div>
+
+            <!-- Feedback on Mayo Stand -->
+            <div class="mt-4 pt-3 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-3">
+              <span id="tray-feedback-msg" class="text-xs font-bold text-slate-800" aria-live="polite">Select necessary supplies for tray setup.</span>
+              <button onclick="validateProcedureTray()" class="px-4 py-2 bg-indigo-800 hover:bg-indigo-900 text-white rounded-xl text-xs font-bold transition-all">
+                Validate Tray Setup
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Next Module -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 flex justify-between items-center">
+          <span class="text-xs text-slate-700 font-semibold">Ready for the 25-question certification examination? Ensure all modules are completed.</span>
+          <button onclick="completeModule(3); switchTab('tab-quiz')" class="px-5 py-2.5 bg-blue-800 hover:bg-blue-900 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-md">
+            <span>Proceed to 25-Question Final Exam</span>
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </section>
+
+      <section id="tab-quiz" role="tabpanel" aria-labelledby="nav-tab-quiz" class="tab-content hidden space-y-6">
+        <!-- Exam Header -->
+        <div class="bg-gradient-to-r from-teal-950 via-slate-900 to-indigo-950 rounded-2xl p-6 text-white shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <span class="text-xs font-bold tracking-wider bg-teal-500/30 text-teal-200 px-3 py-1 rounded-full border border-teal-400/30">Module 4: Credential Examination</span>
+            <h2 class="text-2xl font-bold mt-2">Certified Medical Assistant Clinical Proficiency Exam</h2>
+            <p class="text-sm text-slate-200 mt-1">25 Multiple Choice Questions &bull; 80% (20/25) required to receive the Clinical In-Service Certificate.</p>
+          </div>
+          <div class="bg-white/10 p-3 rounded-xl border border-white/20 text-center min-w-[130px]">
+            <div class="text-[10px] uppercase font-bold text-teal-300">Target Score</div>
+            <div class="text-xl font-black text-white">80% (20/25)</div>
+          </div>
+        </div>
+
+        <!-- QUIZ CONTAINER with accessible radio group semantics -->
+        <div id="quiz-taking-section" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8" role="region" aria-label="Examination Questions">
+          <!-- Quiz Navigation & Status Bar -->
+          <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-200">
+            <div>
+              <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Question <span id="current-q-index">1</span> of 25</span>
+              <h3 id="quiz-category-tag" class="text-xs text-teal-850 font-bold mt-0.5">Medical Abbreviations</h3>
+            </div>
+            <div class="flex items-center gap-3">
+              <span id="answered-badge" class="text-xs bg-slate-100 text-slate-800 px-2.5 py-1 rounded-lg font-bold border border-slate-300">0 of 25 Answered</span>
+            </div>
+          </div>
+
+          <!-- Question Display Area -->
+          <div class="min-h-[160px]">
+            <h3 id="question-text" class="text-base sm:text-lg font-bold text-slate-900 leading-snug mb-5">
+              Loading question content...
+            </h3>
+
+            <!-- Options Radio List -->
+            <div id="options-container" class="space-y-3" role="radiogroup" aria-labelledby="question-text">
+              <!-- Dynamically inserted options -->
+            </div>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <div class="mt-8 pt-5 border-t border-slate-200 flex items-center justify-between">
+            <button id="prev-q-btn" onclick="navigateQuestion(-1)" class="px-4 py-2 rounded-xl border border-slate-400 text-xs font-bold text-slate-800 hover:bg-slate-100 disabled:opacity-30 disabled:pointer-events-none">
+              <i class="fa-solid fa-arrow-left mr-1.5" aria-hidden="true"></i> Previous Question
+            </button>
+            <div class="flex gap-2">
+              <button id="next-q-btn" onclick="navigateQuestion(1)" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold">
+                Next Question <i class="fa-solid fa-arrow-right ml-1.5" aria-hidden="true"></i>
+              </button>
+              <button id="submit-exam-btn" onclick="submitExam()" class="hidden px-6 py-2.5 bg-teal-800 hover:bg-teal-900 text-white rounded-xl text-xs font-bold shadow-md">
+                <i class="fa-solid fa-flag-checkered mr-1.5" aria-hidden="true"></i> Finalize & Grade Exam
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Jump Grid -->
+          <div class="mt-8 pt-4 border-t border-slate-200">
+            <div class="text-[11px] font-bold text-slate-700 uppercase mb-2">Question Quick Index (Jump to question)</div>
+            <div id="question-pills-grid" class="flex flex-wrap gap-1.5" role="group" aria-label="Question Navigator">
+              <!-- 25 Pills generated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- EXAM RESULTS & CERTIFICATE AREA (Initially hidden until graded) -->
+        <div id="quiz-results-section" class="hidden space-y-6">
+          <div id="results-banner" class="p-6 rounded-2xl shadow-sm text-center border" role="region" aria-live="assertive">
+            <!-- Populated via script based on pass/fail -->
+          </div>
+
+          <!-- PRINTABLE CERTIFICATE CARD -->
+          <div id="certificate-printable-card" class="hidden">
+            <div class="flex justify-end mb-3 no-print">
+              <button onclick="window.print()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl shadow flex items-center gap-2">
+                <i class="fa-solid fa-print" aria-hidden="true"></i> Print Official Certificate
+              </button>
+            </div>
+
+            <!-- Authentic Certificate Element with high visual clarity -->
+            <div id="certificate-printable" class="bg-gradient-to-br from-amber-50/50 via-white to-amber-50/30 p-8 sm:p-12 rounded-3xl border-8 border-double border-teal-900 shadow-xl text-center relative overflow-hidden">
+              <!-- Watermark Background -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none" aria-hidden="true">
+                <i class="fa-solid fa-staff-snake text-[450px] text-teal-950"></i>
+              </div>
+
+              <!-- Corner Ornaments -->
+              <div class="absolute top-4 left-4 text-teal-800 text-2xl" aria-hidden="true"><i class="fa-solid fa-certificate"></i></div>
+              <div class="absolute top-4 right-4 text-teal-800 text-2xl" aria-hidden="true"><i class="fa-solid fa-certificate"></i></div>
+              <div class="absolute bottom-4 left-4 text-teal-800 text-2xl" aria-hidden="true"><i class="fa-solid fa-certificate"></i></div>
+              <div class="absolute bottom-4 right-4 text-teal-800 text-2xl" aria-hidden="true"><i class="fa-solid fa-certificate"></i></div>
+
+              <div class="relative z-10">
+                <div class="w-16 h-16 mx-auto bg-teal-900 text-amber-300 rounded-full flex items-center justify-center text-3xl shadow-md mb-3" aria-hidden="true">
+                  <i class="fa-solid fa-medal"></i>
+                </div>
+                
+                <h4 class="text-xs uppercase tracking-[0.25em] font-bold text-teal-900 mb-1">Ambulatory Healthcare Training Institute</h4>
+                <h2 class="cert-font-serif text-3xl sm:text-4xl font-bold text-slate-900 mb-2">Certificate of Continuing Competency</h2>
+                <p class="text-xs text-slate-600 uppercase tracking-widest font-bold mb-6">Medical Assistant Clinical In-Service Education</p>
+
+                <p class="text-sm text-slate-700 mb-2 font-medium">This is to officially certify that</p>
+                <h3 id="cert-recipient-name" class="cert-font-serif text-2xl sm:text-3xl font-bold text-teal-950 border-b-2 border-teal-800 inline-block px-8 py-1 mb-3">
+                  Alex Rivera, CMA
+                </h3>
+
+                <p class="text-xs sm:text-sm text-slate-700 max-w-2xl mx-auto leading-relaxed mb-6 font-medium">
+                  has satisfactorily completed 2.0 Contact Hours of interactive simulation training and successfully demonstrated rigorous proficiency in 
+                  <strong class="text-slate-900 font-bold">Medical Abbreviations & Joint Commission Safety Lists, Clinical Par-Level Inventory & FIFO Supply Management</strong>, and 
+                  <strong class="text-slate-900 font-bold">OSHA Bloodborne Pathogen Sanitization & Exam Room Aseptic Preparation</strong>.
+                </p>
+
+                <!-- Certificate Metadata Details -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto pt-6 border-t border-slate-300 text-left">
+                  <div class="text-center sm:text-left">
+                    <span class="text-[10px] font-bold uppercase text-slate-500 block">Clinic Affiliation</span>
+                    <span id="cert-clinic-name" class="text-xs font-bold text-slate-900">Metro Ambulatory Health Center</span>
+                  </div>
+                  <div class="text-center">
+                    <span class="text-[10px] font-bold uppercase text-slate-500 block">Exam Score / Status</span>
+                    <span id="cert-exam-score" class="text-xs font-bold text-emerald-900">Passed with 96%</span>
+                  </div>
+                  <div class="text-center sm:text-right">
+                    <span class="text-[10px] font-bold uppercase text-slate-500 block">Date of Certification</span>
+                    <span id="cert-issue-date" class="text-xs font-bold text-slate-900">October 13, 2026</span>
+                  </div>
+                </div>
+
+                <!-- Signatures -->
+                <div class="grid grid-cols-2 gap-8 max-w-xl mx-auto mt-8 pt-6 border-t border-slate-300">
+                  <div class="text-center">
+                    <div class="font-serif italic text-base text-slate-800 font-bold">M. Harrison, MD, FAAFP</div>
+                    <div class="text-[10px] text-slate-600 uppercase font-bold">Medical Clinical Director</div>
+                  </div>
+                  <div class="text-center">
+                    <div class="font-serif italic text-base text-slate-800 font-bold">E. Jenkins, RN, BSN, CMA (AAMA)</div>
+                    <div class="text-[10px] text-slate-600 uppercase font-bold">Lead Clinical Preceptor</div>
+                  </div>
+                </div>
+
+                <div class="text-[10px] text-slate-500 mt-6 uppercase tracking-wider font-semibold">
+                  Verification Code: <span id="cert-verification-id" class="font-mono text-slate-800 font-bold">CMA-2026-9842</span> &bull; 2.0 CEU Equivalent Lab
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Detailed Quiz Review List -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h3 class="font-bold text-slate-900 text-base mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-list-check text-teal-800" aria-hidden="true"></i> Comprehensive Exam Answer Key & Clinical Rationale
+            </h3>
+            <div id="exam-review-container" class="space-y-3">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Accessible Toast Notification with aria-live -->
+  <div id="toast" role="status" aria-live="polite" class="fixed bottom-5 right-5 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 transform translate-y-24 transition-transform duration-300 z-50 text-xs font-semibold">
+    <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-base" aria-hidden="true"></i>
+    <span id="toast-message">Action recorded successfully!</span>
+  </div>
+
+  <script>
+    // --- ACCESSIBILITY TOOLS (Font Scale, Contrast, Dyslexia Font) ---
+    let currentFontScalePercent = 100;
+    let isHighContrast = false;
+    let isDyslexiaFont = false;
+
+    function announceToScreenReader(msg) {
+      const announcer = document.getElementById('sr-announcer');
+      if (announcer) {
+        announcer.textContent = msg;
+      }
+    }
+
+    function adjustFontSize(delta) {
+      currentFontScalePercent = Math.min(130, Math.max(90, currentFontScalePercent + (delta * 5)));
+      document.documentElement.style.setProperty('--font-scale', `${currentFontScalePercent / 100}rem`);
+      announceToScreenReader(`Font size adjusted to ${currentFontScalePercent} percent`);
+    }
+
+    function resetFontSize() {
+      currentFontScalePercent = 100;
+      document.documentElement.style.setProperty('--font-scale', '1rem');
+      announceToScreenReader('Font size reset to normal');
+    }
+
+    function toggleContrastMode() {
+      isHighContrast = !isHighContrast;
+      document.body.classList.toggle('high-contrast-mode', isHighContrast);
+      const btn = document.getElementById('toggle-contrast-btn');
+      btn.setAttribute('aria-pressed', isHighContrast);
+      btn.classList.toggle('bg-amber-400', isHighContrast);
+      btn.classList.toggle('text-black', isHighContrast);
+      announceToScreenReader(isHighContrast ? 'High contrast mode enabled' : 'Standard color mode enabled');
+    }
+
+    function toggleDyslexiaFont() {
+      isDyslexiaFont = !isDyslexiaFont;
+      document.body.classList.toggle('dyslexia-font', isDyslexiaFont);
+      const btn = document.getElementById('toggle-dyslexia-btn');
+      btn.setAttribute('aria-pressed', isDyslexiaFont);
+      btn.classList.toggle('bg-amber-400', isDyslexiaFont);
+      btn.classList.toggle('text-black', isDyslexiaFont);
+      announceToScreenReader(isDyslexiaFont ? 'Atkinson Hyperlegible dyslexia friendly font applied' : 'Standard font applied');
+    }
+
+    function handleCardKey(event) {
+      if (event.key === ' ' || event.key === 'Enter') {
+        event.preventDefault();
+        flipFlashcard();
+      }
+    }
+
+    // --- 1. DATA REPOSITORIES ---
+    const abbreviationsData = [
+      { term: "PO", meaning: "By mouth (per os)", category: "Route", note: "Oral administration of tablets, capsules, or liquids." },
+      { term: "NPO", meaning: "Nothing by mouth (nil per os)", category: "Status", note: "Crucial prior to surgeries or fasting lipid/glucose labs." },
+      { term: "PRN", meaning: "As needed (pro re nata)", category: "Frequency", note: "Must always have an explicit reason/symptom documented." },
+      { term: "BID", meaning: "Twice a day", category: "Frequency", note: "Every 12 hours approximate dosing." },
+      { term: "TID", meaning: "Three times a day", category: "Frequency", note: "Typically taken with morning, afternoon, and evening meals." },
+      { term: "QID", meaning: "Four times a day", category: "Frequency", note: "Space roughly every 4 to 6 hours while awake." },
+      { term: "IM", meaning: "Intramuscular", category: "Route", note: "Injections at 90-degree angle (deltoid, vastus lateralis, ventrogluteal)." },
+      { term: "SubQ / SQ", meaning: "Subcutaneous", category: "Route", note: "Injections at 45-degree angle (or 90 deg for short insulin needles)." },
+      { term: "ID", meaning: "Intradermal", category: "Route", note: "Injections at 10-15 degree angle for PPD Mantoux or allergy testing." },
+      { term: "STAT", meaning: "Immediately / at once", category: "Urgency", note: "Highest clinical priority for emergency triage orders." },
+      { term: "SOB", meaning: "Shortness of breath", category: "Symptom", note: "Key triage vital symptom; evaluate pulse oximetry." },
+      { term: "HTN", meaning: "Hypertension", category: "Diagnosis", note: "High blood pressure documented in patient history." },
+      { term: "DM", meaning: "Diabetes mellitus", category: "Diagnosis", note: "Type 1 or Type 2; requires regular HbA1c screening." },
+      { term: "gtt", meaning: "Drops (guttae)", category: "Dosing", note: "Used in ophthalmic and otic drop administrations." },
+      { term: "ac", meaning: "Before meals (ante cibum)", category: "Timing", note: "Important for pre-prandial insulins and PPIs." },
+      { term: "pc", meaning: "After meals (post cibum)", category: "Timing", note: "Reduces GI upset for medications like NSAIDs." },
+      { term: "hs", meaning: "At bedtime (hora somni)", category: "Timing", note: "Sedatives, nighttime statins (e.g., simvastatin)." },
+      { term: "cc", meaning: "Chief complaint", category: "Charting", note: "Patient's primary reason for the clinical visit in their own words." },
+      { term: "OTC", meaning: "Over-the-counter", category: "Meds", note: "Non-prescription medications, vitamins, and herbal supplements." },
+      { term: "URI", meaning: "Upper respiratory infection", category: "Diagnosis", note: "Common cold, acute sinusitis, pharyngitis." },
+      { term: "UTI", meaning: "Urinary tract infection", category: "Diagnosis", note: "Assessed via clean-catch midstream urinalysis dipstick." },
+      { term: "NKDA", meaning: "No known drug allergies", category: "Safety", note: "Must confirm verbally at every visit prior to injections/prescriptions." },
+      { term: "PR", meaning: "Per rectum / Rectally", category: "Route", note: "Suppository or enema medication route." },
+      { term: "SL", meaning: "Sublingual (under tongue)", category: "Route", note: "Rapid absorption into capillary network (e.g., Nitroglycerin)." }
+    ];
+
+    const inventoryData = [
+      { id: 1, name: "Nitrile Gloves (Medium, Box/100)", location: "Exam Rooms 1-4 Dispenser", par: 20, reorderPt: 6, current: 4, unitCost: 11.50, unit: "Box" },
+      { id: 2, name: "Alcohol Prep Pads (Box/200)", location: "Phlebotomy Cart", par: 15, reorderPt: 5, current: 8, unitCost: 3.25, unit: "Box" },
+      { id: 3, name: "Exam Table Paper Rolls (18\" x 225')", location: "Central Supply Closet", par: 12, reorderPt: 4, current: 2, unitCost: 6.80, unit: "Roll" },
+      { id: 4, name: "Sterile 4x4 Gauze Sponges (Box/50)", location: "Minor Procedure Cart", par: 10, reorderPt: 3, current: 3, unitCost: 9.10, unit: "Box" },
+      { id: 5, name: "Vacutainer SST Serum Tubes (Tray/100)", location: "Lab Phlebotomy Station", par: 8, reorderPt: 2, current: 1, unitCost: 28.00, unit: "Tray" },
+      { id: 6, name: "Sharps Biohazard Container 5-Quart", location: "Wall-mounts Rooms 1-4", par: 6, reorderPt: 2, current: 2, unitCost: 14.50, unit: "Unit" },
+      { id: 7, name: "CaviWipes Disinfectant Towelettes", location: "Sanitation Caddy", par: 16, reorderPt: 5, current: 3, unitCost: 13.75, unit: "Canister" },
+      { id: 8, name: "Adult Otoscope Specula Tips (4.0mm)", location: "Exam Room Stations", par: 10, reorderPt: 3, current: 7, unitCost: 8.90, unit: "Bag/250" },
+      { id: 9, name: "Urine Reagent Dipstick 10-SG", location: "CLIA Waived Lab Shelf", par: 6, reorderPt: 2, current: 1, unitCost: 34.00, unit: "Bottle/100" }
+    ];
+
+    const examQuestions = [
+      {
+        q: "Which medication administration abbreviation translates to 'twice daily'?",
+        options: ["TID", "BID", "QID", "PRN"],
+        correct: 1,
+        category: "Abbreviations",
+        rationale: "BID stands for the Latin 'bis in die', which denotes administration two times every 24 hours."
+      },
+      {
+        q: "According to The Joint Commission's official 'Do Not Use' list, why must the abbreviation 'U' (for unit) be avoided?",
+        options: [
+          "It is trademarked by European pharmaceutical agencies.",
+          "It can easily be mistaken for a zero (0), the number 4, or 'cc'.",
+          "It is only approved for veterinary dosing.",
+          "It fails Medicare billing translation standards."
+        ],
+        correct: 1,
+        category: "Patient Safety & Standards",
+        rationale: "Handwritten 'U' or 'u' is notoriously misread as '0' or '4', precipitating catastrophic 10-fold or 4-fold medication overdoses."
+      },
+      {
+        q: "What is the correct way to document a 5 milligram dose to eliminate trailing-zero errors?",
+        options: ["5.0 mg", "5 mg", "05.00 mg", ".5 mg"],
+        correct: 1,
+        category: "Documentation Standards",
+        rationale: "Never use trailing zeros (write '5 mg', not '5.0 mg') because a missed decimal point can cause a 50 mg overdose. Always use leading zeros for fractions (e.g., '0.5 mg')."
+      },
+      {
+        q: "A physician enters an order for 'NPO past midnight'. What must the MA instruct the patient regarding their preparation?",
+        options: [
+          "Take clear broths and black coffee only.",
+          "Consume nothing by mouth, including liquids and food, after midnight.",
+          "Take morning oral medications with full glasses of milk.",
+          "Restrict physical activity to bed rest after midnight."
+        ],
+        correct: 1,
+        category: "Patient Prep & Terminology",
+        rationale: "NPO stands for 'nil per os' (nothing by mouth), preventing pulmonary aspiration during anesthesia or ensuring accurate fasting test results."
+      },
+      {
+        q: "Which angle of needle insertion is standard for an Intramuscular (IM) injection in the deltoid muscle?",
+        options: ["15 degrees", "25 degrees", "45 degrees", "90 degrees"],
+        correct: 3,
+        category: "Clinical Procedures",
+        rationale: "Intramuscular (IM) injections are administered directly into muscle tissue at a perpendicular 90-degree angle."
+      },
+      {
+        q: "What does the abbreviation 'PRN' dictate regarding medication dispensing?",
+        options: [
+          "Administer prior to surgical prep.",
+          "Administer as needed according to documented indications.",
+          "Administer post-recovery only.",
+          "Administer every morning on an empty stomach."
+        ],
+        correct: 1,
+        category: "Abbreviations",
+        rationale: "'Pro re nata' (PRN) signifies 'as needed', requiring symptom-specific criteria such as 'for mild pain every 6 hours PRN'."
+      },
+      {
+        q: "Which injection route is performed at a 10 to 15-degree angle without aspiration to produce a wheal/bleb?",
+        options: ["Subcutaneous (SubQ)", "Intramuscular (IM)", "Intradermal (ID)", "Intravenous (IV)"],
+        correct: 2,
+        category: "Clinical Procedures",
+        rationale: "Intradermal (ID) injections, such as the PPD Mantoux tuberculin skin test, require a 10-15° angle with bevel up to create an epidermal wheal."
+      },
+      {
+        q: "What inventory principle dictates placing items with the earliest expiration dates at the front of the shelf?",
+        options: ["LIFO (Last-In, First-Out)", "FIFO (First-In, First-Out)", "JIT (Just-In-Time)", "EOQ (Economic Order Quantity)"],
+        correct: 1,
+        category: "Inventory Management",
+        rationale: "FIFO (First-In, First-Out) ensures oldest stock is consumed prior to expiration, cutting clinic financial waste and preventing expired product usage."
+      },
+      {
+        q: "In clinic inventory management, what is defined as the 'Par Level'?",
+        options: [
+          "The absolute minimum stock count before an emergency delivery is made.",
+          "The maximum cost allowed per purchase order.",
+          "The predetermined optimum quantity of an item that should be maintained on hand.",
+          "The number of damaged goods sent back to medical supply vendors."
+        ],
+        correct: 2,
+        category: "Inventory Management",
+        rationale: "A Par Level is the benchmark baseline quantity needed to support patient appointments until the next scheduled replenishment."
+      },
+      {
+        q: "When must a Medical Assistant initiate a supply replenishment order?",
+        options: [
+          "Only when the product bin is entirely empty.",
+          "When on-hand inventory drops to or below the predetermined Reorder Point.",
+          "On the final day of each calendar quarter.",
+          "When requested by patient survey feedback."
+        ],
+        correct: 1,
+        category: "Inventory Management",
+        rationale: "The Reorder Point accounts for order processing and vendor lead shipping time so the clinic never experiences stockouts."
+      },
+      {
+        q: "What document provides essential safety, handling, storage, and first-aid data for clinical chemicals and disinfectants?",
+        options: [
+          "CLIA Certificate of Waiver",
+          "Safety Data Sheet (SDS)",
+          "Physicians' Desk Reference (PDR)",
+          "HIPAA Notice of Privacy Practices"
+        ],
+        correct: 1,
+        category: "OSHA & Regulations",
+        rationale: "OSHA's Hazard Communication Standard mandates readily available Safety Data Sheets (SDSs) for all hazardous chemicals."
+      },
+      {
+        q: "At what point must an in-room Sharps Biohazard container be closed, removed, and replaced?",
+        options: [
+          "When it is 100% full and needles push against the lid.",
+          "When it reaches two-thirds (2/3) to three-quarters (3/4) capacity.",
+          "Only after 1 calendar year has elapsed.",
+          "Once every Monday morning regardless of contents."
+        ],
+        correct: 1,
+        category: "OSHA & Infection Control",
+        rationale: "OSHA protocols mandate sealing and replacing sharps containers when they reach 2/3 to 3/4 fullness to prevent puncture injuries."
+      },
+      {
+        q: "What is the recommended storage temperature range for clinical vaccine refrigerators maintaining the cold chain?",
+        options: [
+          "-10°C to 0°C (14°F to 32°F)",
+          "2°C to 8°C (36°F to 46°F)",
+          "12°C to 18°C (54°F to 64°F)",
+          "20°C to 25°C (68°F to 77°F)"
+        ],
+        correct: 1,
+        category: "Clinical Operations",
+        rationale: "CDC guidelines require vaccine refrigerated storage between 2°C and 8°C (36°F and 46°F) to preserve biologic potency."
+      },
+      {
+        q: "What critical requirement applies to hospital-grade chemical disinfectant wipes during exam room turnover?",
+        options: [
+          "The surface must remain visibly wet for the specified manufacturer contact/kill time.",
+          "Surfaces must be immediately wiped dry with cotton towels.",
+          "They must only be used while room ventilation is turned off.",
+          "They should be diluted 50/50 with standard tap water."
+        ],
+        correct: 0,
+        category: "Asepsis & Turnover",
+        rationale: "Contact (dwell) time is the duration a disinfectant must stay wet on a surface to destroy bloodborne pathogens and microorganisms."
+      },
+      {
+        q: "When prepping the exam table between patients, what is the standard practice for table paper replacement?",
+        options: [
+          "Flip the existing paper upside down if no fluids are visible.",
+          "Pull fresh paper down from the head roll to cover the table, discarding soiled paper in normal or biohazard trash as indicated.",
+          "Spray disinfectant directly onto paper and wipe with paper towel.",
+          "Replace table paper only once at the beginning of each clinical day."
+        ],
+        correct: 1,
+        category: "Asepsis & Turnover",
+        rationale: "Fresh paper barrier must be unrolled and smoothed down across the entire table for each patient to prevent cross-contamination."
+      },
+      {
+        q: "On a sterile Mayo stand field, which zone is officially considered non-sterile and contaminated?",
+        options: [
+          "The center 3-inch focal zone.",
+          "The outer 1-inch border perimeter of the sterile drape.",
+          "Any area covered with sterile 4x4 gauze.",
+          "The handle of sterile Littauer suture scissors."
+        ],
+        correct: 1,
+        category: "Sterile Technique",
+        rationale: "Standard aseptic protocol establishes the outer 1-inch perimeter of any sterile drape as contaminated."
+      },
+      {
+        q: "What does the abbreviation 'ac' mean when written on a patient medication schedule?",
+        options: ["After meals", "Before meals", "With citrus fruit", "At bedside"],
+        correct: 1,
+        category: "Abbreviations",
+        rationale: "'Ante cibum' (ac) translates to 'before meals', common for rapid-acting mealtime insulins or proton pump inhibitors."
+      },
+      {
+        q: "Which scissors are designed specifically with a hook on the lower blade to lift and cut surgical stitches without traumatizing surrounding tissue?",
+        options: [
+          "Mayo dissecting scissors",
+          "Littauer suture removal scissors",
+          "Bandage Lister scissors",
+          "Iris delicate eye scissors"
+        ],
+        correct: 1,
+        category: "Surgical Instruments",
+        rationale: "Littauer suture scissors have a specialized crescent hook designed to slide smoothly underneath sutures."
+      },
+      {
+        q: "What is the primary action required of an MA when blood spills onto an exam room tile floor?",
+        options: [
+          "Mop immediately with warm water only.",
+          "Don gloves and eye protection, use an OSHA-approved biohazard spill kit or 1:10 bleach solution, and dispose into biohazard waste.",
+          "Place a warning cone over it until the evening custodial crew arrives.",
+          "Cover with paper towels and allow it to dry before sweeping."
+        ],
+        correct: 1,
+        category: "OSHA & Bloodborne Pathogens",
+        rationale: "Biohazard spills require proper PPE and an EPA-registered disinfectant or 1:10 dilution of household bleach."
+      },
+      {
+        q: "The abbreviation 'SL' indicates which route of drug administration?",
+        options: ["Sublingual (under the tongue)", "Subcutaneous (fatty tissue)", "Scleral lower lid", "Spinal lumbar"],
+        correct: 0,
+        category: "Abbreviations & Routes",
+        rationale: "Sublingual (SL) medications dissolve under the tongue for direct absorption through vascular mucous membranes into systemic circulation."
+      },
+      {
+        q: "What diagnostic equipment must be verified in working order during daily exam room morning prep?",
+        options: [
+          "Sphygmomanometer, otoscope, ophthalmoscope, pulse oximeter, and thermometer.",
+          "Autoclave steam chamber pressure only.",
+          "EHR server routing switches.",
+          "Ultrasound transrectal transducer."
+        ],
+        correct: 0,
+        category: "Room Prep & Equipment",
+        rationale: "A full vital signs set and head-to-toe diagnostic tools (otoscope, ophthalmoscope, BP cuff) must be checked before patient arrivals."
+      },
+      {
+        q: "Which abbreviation should be charted to record that a patient reports having no known drug allergies?",
+        options: ["NPO", "NKDA", "NDA", "NKA-D"],
+        correct: 1,
+        category: "Documentation",
+        rationale: "NKDA ('No Known Drug Allergies') is the standard chart entry verifying the allergy status has been actively confirmed."
+      },
+      {
+        q: "When setting up a sterile tray, you accidentally brush the sterile drape with your non-sterile lab coat sleeve. What must you do?",
+        options: [
+          "Continue if the sleeve looked visually clean.",
+          "Spray the affected drape corner with isopropyl alcohol.",
+          "Consider the field contaminated and discard all items to restart with fresh sterile drape and supplies.",
+          "Document the occurrence and proceed with the minor surgery."
+        ],
+        correct: 2,
+        category: "Sterile Technique",
+        rationale: "Sterility is absolute. When an unsterile object contacts a sterile field, it is contaminated and must be broken down and restarted."
+      },
+      {
+        q: "What is the standard procedure for handling single-use disposable specula and tongue depressors?",
+        options: [
+          "Autoclave them at 250°F for re-use.",
+          "Soak in glutaraldehyde for 10 hours.",
+          "Discard immediately into appropriate waste receptacle after a single patient examination.",
+          "Sanitize with dish detergent and return to exam room drawers."
+        ],
+        correct: 2,
+        category: "Infection Control",
+        rationale: "Single-use items are designed strictly for one-time contact and must be discarded immediately after use."
+      },
+      {
+        q: "To safeguard HIPAA compliance when leaving an exam room, what must the Medical Assistant always do with the exam room computer terminal?",
+        options: [
+          "Turn off the power surge strip completely.",
+          "Lock or log out of the Electronic Health Record (EHR) session.",
+          "Leave the screen open on the schedule view.",
+          "Rotate the monitor toward the door."
+        ],
+        correct: 1,
+        category: "HIPAA & Office Protocol",
+        rationale: "Leaving active patient records visible violates HIPAA security rules; terminals must be locked (e.g. Win+L) whenever unattended."
+      }
+    ];
+
+    let studentProfile = {
+      name: "Alex Rivera, CMA",
+      clinic: "Metro Ambulatory Health Center",
+      track: "General Outpatient & Family Medicine"
+    };
+
+    let courseProgress = {
+      orientationCompleted: true,
+      module1Completed: false,
+      module2Completed: false,
+      module3Completed: false,
+      examPassed: false
+    };
+
+    let flashcardIndex = 0;
+    let flashcardFlipped = false;
+    let masteredAbbrs = new Set();
+
+    let userExamAnswers = new Array(examQuestions.length).fill(null);
+    let currentQuizIndex = 0;
+    let selectedTrayItems = new Set();
+    let labTimeRemaining = 7200;
+    let timerInterval = null;
+
+    window.onload = function() {
+      initTimer();
+      renderAbbreviationFlashcard();
+      renderAbbreviationTable();
+      renderInventoryTable();
+      renderQuizQuestion(0);
+      renderQuizIndexPills();
+      updateProgressBar();
+    };
+
+    function initTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (labTimeRemaining > 0) {
+          labTimeRemaining--;
+          const hrs = Math.floor(labTimeRemaining / 3600);
+          const mins = Math.floor((labTimeRemaining % 3600) / 60);
+          const secs = labTimeRemaining % 60;
+          document.getElementById('course-timer').textContent = 
+            `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        } else {
+          clearInterval(timerInterval);
+          showToast("2-Hour Lab Session Concluded", "info");
+        }
+      }, 1000);
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      const targetPanel = document.getElementById(tabId);
+      if (targetPanel) {
+        targetPanel.classList.remove('hidden');
+      }
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('border-teal-700', 'bg-teal-50', 'text-teal-900', 'font-bold', 'shadow-sm');
+        btn.classList.add('border-transparent', 'text-slate-700');
+        btn.setAttribute('aria-selected', 'false');
+      });
+
+      const activeNavId = tabId.replace('tab-', 'nav-tab-');
+      const activeNav = document.getElementById(activeNavId);
+      if (activeNav) {
+        activeNav.classList.remove('border-transparent', 'text-slate-700');
+        activeNav.classList.add('border-teal-700', 'bg-teal-50', 'text-teal-900', 'font-bold', 'shadow-sm');
+        activeNav.setAttribute('aria-selected', 'true');
+      }
+
+      announceToScreenReader(`Switched to ${activeNav ? activeNav.textContent.trim() : tabId}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function saveStudentProfileAndNext() {
+      const name = document.getElementById('student-name-input').value.trim();
+      const clinic = document.getElementById('clinic-name-input').value.trim();
+      const track = document.getElementById('specialty-track-input').value;
+
+      if (!name) {
+        showToast("Please enter student name for certificate", "warning");
+        document.getElementById('student-name-input').focus();
+        return;
+      }
+
+      studentProfile.name = name;
+      studentProfile.clinic = clinic || "Ambulatory Health Center";
+      studentProfile.track = track;
+
+      document.getElementById('student-display-badge').textContent = `Candidate: ${studentProfile.name}`;
+      showToast("Student Profile Registered!", "success");
+      completeModule(0);
+      switchTab('tab-abbr');
+    }
+
+    function completeModule(moduleNumber) {
+      if (moduleNumber === 0) courseProgress.orientationCompleted = true;
+      if (moduleNumber === 1) courseProgress.module1Completed = true;
+      if (moduleNumber === 2) courseProgress.module2Completed = true;
+      if (moduleNumber === 3) courseProgress.module3Completed = true;
+
+      updateProgressBar();
+    }
+
+    function updateProgressBar() {
+      let completedCount = 0;
+      if (courseProgress.orientationCompleted) completedCount += 20;
+      if (courseProgress.module1Completed) completedCount += 25;
+      if (courseProgress.module2Completed) completedCount += 25;
+      if (courseProgress.module3Completed) completedCount += 20;
+      if (courseProgress.examPassed) completedCount += 10;
+
+      const total = Math.min(100, completedCount);
+      document.getElementById('progress-bar-fill').style.width = `${total}%`;
+      document.getElementById('progress-percent').textContent = `${total}% Completed`;
+      document.getElementById('progress-bar-container').setAttribute('aria-valuenow', total);
+    }
+
+    function renderAbbreviationFlashcard() {
+      const item = abbreviationsData[flashcardIndex];
+      const front = document.getElementById('flashcard-front');
+      const back = document.getElementById('flashcard-back');
+
+      flashcardFlipped = false;
+      front.classList.remove('hidden');
+      back.classList.add('hidden');
+
+      document.getElementById('flashcard-term').textContent = item.term;
+      document.getElementById('flashcard-definition').textContent = item.meaning;
+      document.getElementById('flashcard-example').textContent = `${item.category} • ${item.note}`;
+      document.getElementById('flashcard-category').textContent = item.category;
+
+      const cardBox = document.getElementById('flashcard-box');
+      cardBox.setAttribute('aria-label', `Flashcard: ${item.term}. Category: ${item.category}. Press enter or space to view definition.`);
+    }
+
+    function flipFlashcard() {
+      const front = document.getElementById('flashcard-front');
+      const back = document.getElementById('flashcard-back');
+      flashcardFlipped = !flashcardFlipped;
+
+      if (flashcardFlipped) {
+        front.classList.add('hidden');
+        back.classList.remove('hidden');
+        const item = abbreviationsData[flashcardIndex];
+        announceToScreenReader(`Flipped card. Definition: ${item.meaning}. Note: ${item.note}`);
+      } else {
+        front.classList.remove('hidden');
+        back.classList.add('hidden');
+        announceToScreenReader(`Front of card: ${abbreviationsData[flashcardIndex].term}`);
+      }
+    }
+
+    function nextFlashcard() {
+      flashcardIndex = (flashcardIndex + 1) % abbreviationsData.length;
+      renderAbbreviationFlashcard();
+    }
+
+    function prevFlashcard() {
+      flashcardIndex = (flashcardIndex - 1 + abbreviationsData.length) % abbreviationsData.length;
+      renderAbbreviationFlashcard();
+    }
+
+    function markCurrentAbbrMastered(isMastered) {
+      const cur = abbreviationsData[flashcardIndex].term;
+      if (isMastered) {
+        masteredAbbrs.add(cur);
+        showToast(`Mastered abbreviation: ${cur}`, 'success');
+      } else {
+        masteredAbbrs.delete(cur);
+      }
+      document.getElementById('abbr-mastered-count').textContent = `${masteredAbbrs.size} / ${abbreviationsData.length} Mastered`;
+      nextFlashcard();
+    }
+
+    function renderAbbreviationTable() {
+      const tbody = document.getElementById('abbr-table-body');
+      tbody.innerHTML = '';
+      abbreviationsData.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-100 transition-colors";
+        tr.innerHTML = `
+          <td class="py-2.5 px-3 font-bold text-teal-900">${item.term}</td>
+          <td class="py-2.5 px-3 font-semibold">${item.meaning}</td>
+          <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded-full text-[11px] bg-slate-200 text-slate-800 font-bold">${item.category}</span></td>
+          <td class="py-2.5 px-3 text-slate-700 text-xs font-medium">${item.note}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterAbbrTable() {
+      const filter = document.getElementById('abbr-search-input').value.toLowerCase();
+      const rows = document.querySelectorAll('#abbr-table-body tr');
+      let visibleCount = 0;
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        const matches = text.includes(filter);
+        row.style.display = matches ? '' : 'none';
+        if (matches) visibleCount++;
+      });
+      announceToScreenReader(`Search results: ${visibleCount} abbreviations found`);
+    }
+
+    function renderInventoryTable() {
+      const tbody = document.getElementById('inventory-table-body');
+      tbody.innerHTML = '';
+
+      inventoryData.forEach(item => {
+        const isBelowPar = item.current <= item.reorderPt;
+        const suggestedOrder = Math.max(0, item.par - item.current);
+
+        const statusBadge = isBelowPar 
+          ? `<span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-900 text-xs font-bold"><i class="fa-solid fa-triangle-exclamation mr-1" aria-hidden="true"></i>Low Stock</span>`
+          : `<span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-950 text-xs font-bold"><i class="fa-solid fa-circle-check mr-1" aria-hidden="true"></i>Adequate</span>`;
+
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-100 border-b border-slate-200";
+        tr.innerHTML = `
+          <td class="py-3 px-3">
+            <div class="font-bold text-slate-900">${item.name}</div>
+            <div class="text-xs text-slate-600 font-medium">$${item.unitCost.toFixed(2)} / ${item.unit}</div>
+          </td>
+          <td class="py-3 px-2 text-slate-700 font-medium">${item.location}</td>
+          <td class="py-3 px-2 text-center font-bold text-slate-900">${item.par}</td>
+          <td class="py-3 px-2 text-center text-slate-700 font-semibold">${item.reorderPt}</td>
+          <td class="py-3 px-3 text-center">
+            <label for="stock-input-${item.id}" class="sr-only">Stock count for ${item.name}</label>
+            <input id="stock-input-${item.id}" type="number" min="0" value="${item.current}" onchange="updateItemStock(${item.id}, this.value)" class="w-14 text-center py-1 border border-slate-400 bg-white text-slate-900 rounded-md font-bold focus:ring-2 focus:ring-teal-700 text-xs">
+          </td>
+          <td class="py-3 px-3 text-center">${statusBadge}</td>
+          <td class="py-3 px-3 text-center font-bold ${suggestedOrder > 0 ? 'text-teal-900' : 'text-slate-500'}">${suggestedOrder}</td>
+          <td class="py-3 px-2 text-center">
+            <button onclick="orderStockItem(${item.id})" aria-label="${isBelowPar ? 'Reorder' : 'Top-off'} ${item.name}" class="px-3 py-1 text-xs font-bold rounded-md ${isBelowPar ? 'bg-teal-800 hover:bg-teal-900 text-white' : 'bg-slate-200 text-slate-800 hover:bg-slate-300'} transition-colors">
+              ${isBelowPar ? 'Reorder' : 'Top-off'}
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      calculatePurchaseOrder();
+    }
+
+    function updateItemStock(id, newCount) {
+      const item = inventoryData.find(i => i.id === id);
+      if (item) {
+        item.current = Math.max(0, parseInt(newCount) || 0);
+        renderInventoryTable();
+        announceToScreenReader(`Updated ${item.name} stock to ${item.current}`);
+      }
+    }
+
+    function autoAuditInventory() {
+      inventoryData[0].current = 3;
+      inventoryData[2].current = 1;
+      inventoryData[4].current = 2;
+      inventoryData[6].current = 4;
+      renderInventoryTable();
+      showToast("Clinical count audit completed across all 4 rooms!", "info");
+      announceToScreenReader("Auto audit completed. Four items flagged below threshold.");
+    }
+
+    function orderStockItem(id) {
+      const item = inventoryData.find(i => i.id === id);
+      if (item) {
+        item.current = item.par;
+        showToast(`Replenished ${item.name} to Par Level (${item.par})`, "success");
+        renderInventoryTable();
+      }
+    }
+
+    function calculatePurchaseOrder() {
+      let poListHTML = '';
+      let flaggedItems = 0;
+      let totalEstimatedCost = 0;
+
+      inventoryData.forEach(item => {
+        if (item.current <= item.reorderPt) {
+          flaggedItems++;
+          const orderQty = item.par - item.current;
+          const lineCost = orderQty * item.unitCost;
+          totalEstimatedCost += lineCost;
+
+          poListHTML += `
+            <div class="flex justify-between items-center py-1.5 border-b border-slate-300">
+              <span><strong>${item.name}</strong> — Reorder Qty: <span class="text-teal-900 font-bold">${orderQty} ${item.unit}s</span></span>
+              <span class="font-mono text-slate-900 font-bold">$${lineCost.toFixed(2)}</span>
+            </div>
+          `;
+        }
+      });
+
+      document.getElementById('po-items-count').textContent = `${flaggedItems} Items Flagged`;
+
+      if (flaggedItems === 0) {
+        document.getElementById('po-status-badge').className = "text-xs px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-950 font-bold";
+        document.getElementById('po-status-badge').textContent = "Inventory At Optimal Par Levels";
+        document.getElementById('po-summary-list').innerHTML = `<p class="text-emerald-900 py-1 font-bold"><i class="fa-solid fa-circle-check mr-1" aria-hidden="true"></i> All supply levels satisfy weekly threshold. No purchase order required at this time.</p>`;
+      } else {
+        document.getElementById('po-status-badge').className = "text-xs px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-950 font-bold";
+        document.getElementById('po-status-badge').textContent = "PO Ready for Clinic Manager Signature";
+        document.getElementById('po-summary-list').innerHTML = `
+          ${poListHTML}
+          <div class="flex justify-between items-center pt-2 font-bold text-slate-900 text-xs">
+            <span>Total PO Requisition Amount:</span>
+            <span class="text-teal-950 font-mono text-sm font-black">$${totalEstimatedCost.toFixed(2)}</span>
+          </div>
+        `;
+      }
+    }
+
+    function updateRoomChecklist() {
+      const checkboxes = document.querySelectorAll('.exam-step-chk');
+      let checkedCount = 0;
+      checkboxes.forEach(chk => { if (chk.checked) checkedCount++; });
+
+      document.getElementById('prep-checklist-count').textContent = `${checkedCount} / ${checkboxes.length} Steps Done`;
+      
+      const readyBanner = document.getElementById('room-ready-banner');
+      if (checkedCount === checkboxes.length) {
+        readyBanner.classList.remove('hidden');
+        showToast("Room 3 Turnover Complete & Certified Clean!", "success");
+        announceToScreenReader("Exam room 3 turnover checklist 100 percent complete and verified.");
+      } else {
+        readyBanner.classList.add('hidden');
+      }
+    }
+
+    function toggleTrayItem(btn, isNecessary, name) {
+      const isSelected = selectedTrayItems.has(name);
+      const icon = btn.querySelector('.fa-circle, .fa-circle-check');
+
+      if (isSelected) {
+        selectedTrayItems.delete(name);
+        btn.classList.remove('bg-indigo-100', 'border-indigo-600', 'text-indigo-950', 'font-bold');
+        btn.setAttribute('aria-pressed', 'false');
+        if (icon) {
+          icon.className = 'fa-regular fa-circle text-slate-400';
+        }
+        announceToScreenReader(`Removed ${name} from tray`);
+      } else {
+        selectedTrayItems.add(name);
+        btn.classList.add('bg-indigo-100', 'border-indigo-600', 'text-indigo-950', 'font-bold');
+        btn.setAttribute('aria-pressed', 'true');
+        if (icon) {
+          icon.className = 'fa-solid fa-circle-check text-indigo-800';
+        }
+        announceToScreenReader(`Added ${name} to tray`);
+      }
+    }
+
+    function validateProcedureTray() {
+      const requiredItems = [
+        'Suture Scissors (Littauer)',
+        'Tissue Forceps (Adson)',
+        'Sterile Gauze 4x4 Sponges',
+        'Antiseptic Solution / Wipes',
+        'Steri-Strips / Butterfly Closures',
+        'Sterile Gloves (Appropriate Size)'
+      ];
+
+      const incorrectItems = [
+        'Non-sterile Specimen Cup',
+        'Stethoscope & Sphygmomanometer'
+      ];
+
+      const missing = requiredItems.filter(item => !selectedTrayItems.has(item));
+      const hasIncorrect = incorrectItems.some(item => selectedTrayItems.has(item));
+      const feedback = document.getElementById('tray-feedback-msg');
+
+      if (hasIncorrect) {
+        feedback.innerHTML = `<span class="text-rose-800"><i class="fa-solid fa-circle-xmark mr-1" aria-hidden="true"></i> Asepsis Violation: Remove non-sterile diagnostic items from the Mayo tray!</span>`;
+        showToast("Non-sterile item detected on Mayo stand!", "warning");
+        announceToScreenReader("Validation failed: Asepsis violation, non sterile items found.");
+      } else if (missing.length > 0) {
+        feedback.innerHTML = `<span class="text-amber-900"><i class="fa-solid fa-circle-exclamation mr-1" aria-hidden="true"></i> Incomplete: Missing ${missing.length} necessary clinical item(s).</span>`;
+        showToast(`Missing: ${missing[0]}`, "warning");
+        announceToScreenReader(`Validation incomplete. Missing ${missing.length} necessary items.`);
+      } else {
+        feedback.innerHTML = `<span class="text-emerald-900 font-bold"><i class="fa-solid fa-circle-check mr-1" aria-hidden="true"></i> Perfect Setup! Suture removal tray is 100% compliant & aseptic.</span>`;
+        showToast("Procedure Tray Successfully Validated!", "success");
+        announceToScreenReader("Procedure tray validated successfully and ready for physician.");
+      }
+    }
+
+    function renderQuizIndexPills() {
+      const container = document.getElementById('question-pills-grid');
+      container.innerHTML = '';
+      examQuestions.forEach((q, idx) => {
+        const pill = document.createElement('button');
+        pill.id = `q-pill-${idx}`;
+        pill.onclick = () => renderQuizQuestion(idx);
+        pill.setAttribute('aria-label', `Question ${idx + 1}: ${userExamAnswers[idx] !== null ? 'Answered' : 'Unanswered'}`);
+        pill.className = `w-7 h-7 text-xs rounded-lg font-bold transition-all border ${userExamAnswers[idx] !== null ? 'bg-teal-800 text-white border-teal-800' : 'bg-slate-100 text-slate-800 border-slate-300 hover:bg-slate-200'}`;
+        pill.textContent = idx + 1;
+        container.appendChild(pill);
+      });
+    }
+
+    function renderQuizQuestion(index) {
+      currentQuizIndex = index;
+      const qData = examQuestions[index];
+
+      document.getElementById('current-q-index').textContent = index + 1;
+      document.getElementById('quiz-category-tag').textContent = qData.category;
+      document.getElementById('question-text').textContent = `${index + 1}. ${qData.q}`;
+
+      const optionsBox = document.getElementById('options-container');
+      optionsBox.innerHTML = '';
+
+      qData.options.forEach((opt, optIdx) => {
+        const isSelected = userExamAnswers[index] === optIdx;
+        const optBtn = document.createElement('button');
+        optBtn.type = "button";
+        optBtn.setAttribute('role', 'radio');
+        optBtn.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+        optBtn.onclick = () => selectQuizAnswer(index, optIdx);
+        optBtn.className = `w-full text-left p-4 rounded-xl border transition-all text-xs sm:text-sm flex items-start gap-3 ${
+          isSelected 
+            ? 'bg-teal-50 border-teal-800 text-teal-950 font-bold ring-2 ring-teal-800' 
+            : 'bg-white border-slate-300 text-slate-800 hover:bg-slate-100 font-medium'
+        }`;
+        
+        optBtn.innerHTML = `
+          <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs flex-shrink-0 font-bold ${
+            isSelected ? 'bg-teal-800 text-white' : 'bg-slate-200 text-slate-800'
+          }" aria-hidden="true">
+            ${String.fromCharCode(65 + optIdx)}
+          </span>
+          <span class="leading-relaxed mt-0.5">${opt}</span>
+        `;
+        optionsBox.appendChild(optBtn);
+      });
+
+      document.getElementById('prev-q-btn').disabled = index === 0;
+      const isLast = index === examQuestions.length - 1;
+      document.getElementById('next-q-btn').classList.toggle('hidden', isLast);
+      document.getElementById('submit-exam-btn').classList.toggle('hidden', !isLast);
+
+      document.querySelectorAll('#question-pills-grid button').forEach((pill, pIdx) => {
+        if (pIdx === index) {
+          pill.classList.add('ring-2', 'ring-teal-700', 'scale-110');
+        } else {
+          pill.classList.remove('ring-2', 'ring-teal-700', 'scale-110');
+        }
+      });
+
+      announceToScreenReader(`Question ${index + 1}: ${qData.q}`);
+    }
+
+    function selectQuizAnswer(qIndex, optIndex) {
+      userExamAnswers[qIndex] = optIndex;
+      renderQuizQuestion(qIndex);
+
+      const answeredCount = userExamAnswers.filter(ans => ans !== null).length;
+      document.getElementById('answered-badge').textContent = `${answeredCount} of 25 Answered`;
+
+      const pill = document.getElementById(`q-pill-${qIndex}`);
+      if (pill) {
+        pill.className = `w-7 h-7 text-xs rounded-lg font-bold transition-all border bg-teal-800 text-white border-teal-800 ring-2 ring-teal-700 scale-110`;
+        pill.setAttribute('aria-label', `Question ${qIndex + 1}: Answered`);
+      }
+    }
+
+    function navigateQuestion(offset) {
+      const target = currentQuizIndex + offset;
+      if (target >= 0 && target < examQuestions.length) {
+        renderQuizQuestion(target);
+      }
+    }
+
+    function submitExam() {
+      const unansweredCount = userExamAnswers.filter(ans => ans === null).length;
+      if (unansweredCount > 0) {
+        showToast(`Please answer all questions (${unansweredCount} remaining)`, "warning");
+        announceToScreenReader(`Please answer remaining ${unansweredCount} questions before submitting.`);
+        return;
+      }
+
+      let correctCount = 0;
+      examQuestions.forEach((q, idx) => {
+        if (userExamAnswers[idx] === q.correct) {
+          correctCount++;
+        }
+      });
+
+      const scorePercent = Math.round((correctCount / examQuestions.length) * 100);
+      const passed = scorePercent >= 80;
+
+      document.getElementById('quiz-taking-section').classList.add('hidden');
+      const resultsSection = document.getElementById('quiz-results-section');
+      resultsSection.classList.remove('hidden');
+
+      const resultsBanner = document.getElementById('results-banner');
+      if (passed) {
+        courseProgress.examPassed = true;
+        updateProgressBar();
+
+        resultsBanner.className = "p-8 rounded-2xl shadow-sm text-center border bg-emerald-100 border-emerald-300 text-emerald-950";
+        resultsBanner.innerHTML = `
+          <div class="w-16 h-16 bg-emerald-800 text-white rounded-full flex items-center justify-center text-3xl mx-auto mb-3 shadow-lg" aria-hidden="true">
+            <i class="fa-solid fa-award"></i>
+          </div>
+          <h3 class="text-2xl font-bold">Congratulations, Certification Achieved!</h3>
+          <p class="text-sm mt-1 font-medium">You scored <strong>${scorePercent}% (${correctCount}/25 Correct)</strong>. You have demonstrated clinical mastery in Abbreviations, Inventory Management, and Room Prep.</p>
+          <div class="mt-4 flex justify-center gap-3">
+            <button onclick="document.getElementById('certificate-printable-card').scrollIntoView({ behavior: 'smooth' })" class="px-5 py-2.5 bg-emerald-900 hover:bg-emerald-950 text-white rounded-xl text-xs font-bold shadow-md">
+              <i class="fa-solid fa-graduation-cap mr-1.5" aria-hidden="true"></i> View & Print Official Certificate Below
+            </button>
+          </div>
+        `;
+
+        document.getElementById('certificate-printable-card').classList.remove('hidden');
+        document.getElementById('cert-recipient-name').textContent = studentProfile.name;
+        document.getElementById('cert-clinic-name').textContent = studentProfile.clinic;
+        document.getElementById('cert-exam-score').textContent = `Passed with ${scorePercent}% Score`;
+
+        const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById('cert-issue-date').textContent = today;
+        document.getElementById('cert-verification-id').textContent = `CMA-${Math.floor(100000 + Math.random() * 900000)}`;
+
+        announceToScreenReader(`Congratulations, you passed with ${scorePercent} percent! Certificate unlocked.`);
+      } else {
+        resultsBanner.className = "p-8 rounded-2xl shadow-sm text-center border bg-rose-100 border-rose-300 text-rose-950";
+        resultsBanner.innerHTML = `
+          <div class="w-16 h-16 bg-rose-800 text-white rounded-full flex items-center justify-center text-3xl mx-auto mb-3 shadow-lg" aria-hidden="true">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <h3 class="text-2xl font-bold">Score: ${scorePercent}% (${correctCount}/25 Correct)</h3>
+          <p class="text-sm mt-1 font-medium">An 80% passing grade (at least 20/25 correct) is mandatory to earn credential issuance.</p>
+          <div class="mt-4 flex justify-center gap-3">
+            <button onclick="retakeExam()" class="px-5 py-2.5 bg-rose-900 hover:bg-rose-950 text-white rounded-xl text-xs font-bold shadow-md">
+              <i class="fa-solid fa-arrows-rotate mr-1.5" aria-hidden="true"></i> Retake Examination
+            </button>
+          </div>
+        `;
+        document.getElementById('certificate-printable-card').classList.add('hidden');
+        announceToScreenReader(`Exam completed. Score was ${scorePercent} percent. 80 percent is required to pass.`);
+      }
+
+      renderExamReview();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderExamReview() {
+      const reviewBox = document.getElementById('exam-review-container');
+      reviewBox.innerHTML = '';
+
+      examQuestions.forEach((q, idx) => {
+        const userAns = userExamAnswers[idx];
+        const isCorrect = userAns === q.correct;
+
+        const row = document.createElement('div');
+        row.className = `p-4 rounded-xl border text-xs ${isCorrect ? 'bg-emerald-50 border-emerald-300' : 'bg-rose-50 border-rose-300'}`;
+        row.innerHTML = `
+          <div class="flex items-start justify-between gap-2">
+            <span class="font-bold text-slate-900">${idx + 1}. ${q.q}</span>
+            <span class="px-2 py-0.5 rounded text-[11px] font-bold ${isCorrect ? 'bg-emerald-200 text-emerald-950' : 'bg-rose-200 text-rose-950'}">
+              ${isCorrect ? 'Correct' : 'Incorrect'}
+            </span>
+          </div>
+          <div class="mt-2 text-slate-800 font-medium">
+            <div>Your Answer: <strong class="${isCorrect ? 'text-emerald-900' : 'text-rose-900'} font-bold">${q.options[userAns]}</strong></div>
+            ${!isCorrect ? `<div class="text-emerald-950 mt-0.5">Correct Answer: <strong>${q.options[q.correct]}</strong></div>` : ''}
+            <div class="mt-1.5 text-xs text-slate-800 bg-white/90 p-2.5 rounded-lg border border-slate-300">Rationale: ${q.rationale}</div>
+          </div>
+        `;
+        reviewBox.appendChild(row);
+      });
+    }
+
+    function retakeExam() {
+      userExamAnswers = new Array(examQuestions.length).fill(null);
+      document.getElementById('quiz-results-section').classList.add('hidden');
+      document.getElementById('quiz-taking-section').classList.remove('hidden');
+      renderQuizIndexPills();
+      renderQuizQuestion(0);
+      document.getElementById('answered-badge').textContent = `0 of 25 Answered`;
+      showToast("Exam reset. Good luck on your re-take!", "info");
+      announceToScreenReader("Exam has been reset for a retake.");
+    }
+
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      const icon = document.getElementById('toast-icon');
+      const msg = document.getElementById('toast-message');
+
+      msg.textContent = message;
+
+      if (type === 'success') {
+        icon.className = 'fa-solid fa-circle-check text-emerald-400 text-base';
+      } else if (type === 'warning') {
+        icon.className = 'fa-solid fa-triangle-exclamation text-amber-300 text-base';
+      } else {
+        icon.className = 'fa-solid fa-circle-info text-sky-400 text-base';
+      }
+
+      toast.classList.remove('translate-y-24');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24');
+      }, 3500);
+    }
+
+    document.getElementById('reset-session-btn').addEventListener('click', () => {
+      labTimeRemaining = 7200;
+      userExamAnswers = new Array(examQuestions.length).fill(null);
+      masteredAbbrs.clear();
+      selectedTrayItems.clear();
+      document.getElementById('abbr-mastered-count').textContent = `0 / ${abbreviationsData.length} Mastered`;
+      document.querySelectorAll('.exam-step-chk').forEach(c => c.checked = false);
+      updateRoomChecklist();
+      courseProgress = {
+        orientationCompleted: true,
+        module1Completed: false,
+        module2Completed: false,
+        module3Completed: false,
+        examPassed: false
+      };
+      updateProgressBar();
+      renderQuizIndexPills();
+      switchTab('tab-intro');
+      showToast("Simulation Lab Session Reset to 2:00:00", "info");
+      announceToScreenReader("Simulation lab reset to beginning.");
+    });
+  </script>
+</body>
+</html>
